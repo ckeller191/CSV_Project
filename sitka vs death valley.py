@@ -14,10 +14,8 @@ header_dict_sitka = {}
 
 
 for index, column_header in enumerate(header_sitka):
-    print("Index: ", index, "Column Name: ", column_header)
     header_dict_sitka[column_header] = index
 
-print(header_dict_sitka)
 
 
 #Death Valley File
@@ -31,10 +29,9 @@ header_valley = next(valley_file)
 header_dict_valley = {}
 
 for index, column_header in enumerate(header_valley):
-    print("Index: ", index, "Column Name: ", column_header)
     header_dict_valley[column_header] = index
 
-print(header_dict_valley)
+
 
 #make empty lists
 
@@ -91,25 +88,44 @@ for row in valley_file:
         v_names.append(v_name)
 
 
+
+
+
 #create plot 
 
 import matplotlib.pyplot as plt
 
 fig, a = plt.subplots(2)
 
+plt.suptitle("Temperature comparison between SITKA AIRPORT, AK US and DEATH VALLEY, CA US", fontsize=16)
+
+#sitka plot
+
 a[0].plot(s_dates, s_highs, c='red')
 a[0].plot(s_dates, s_lows, c='blue')
 
+a[0].set_title(str(s_names[1]), fontsize=16)
 
+#death valley plot
 
 
 a[1].plot(v_dates, v_highs, c='red')
 a[1].plot(v_dates, v_lows, c='blue')
 
+
+a[1].set_title(v_names[1], fontsize=16)
+
+
+#final formatting touches
+
 fig.autofmt_xdate()
 
 a[0].fill_between(s_dates, s_highs, s_lows, facecolor='blue', alpha=0.1)
 a[1].fill_between(v_dates, v_highs, v_lows, facecolor='blue', alpha=0.1)
+
+
+
+
 
 plt.show()
 
